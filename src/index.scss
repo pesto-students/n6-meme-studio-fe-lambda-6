@@ -1,0 +1,86 @@
+/* ./src/index.css */
+// @import 'tailwindcss/base';
+
+// @import 'tailwindcss/components';
+
+// @import 'tailwindcss/utilities';
+
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@layer utilities {
+  @variants responsive {
+    .masonry-6-col {
+      column-count: 6;
+      column-gap: 1em;
+    }
+    .masonry-5-col {
+      column-count: 5;
+      column-gap: 1em;
+    }
+    .masonry-4-col {
+      column-count: 4;
+      column-gap: 1em;
+    }
+    .masonry-3-col {
+      column-count: 3;
+      column-gap: 1em;
+    }
+    .masonry-2-col {
+      column-count: 2;
+      column-gap: 1em;
+    }
+    .break-inside {
+      break-inside: avoid;
+    }
+  }
+}
+
+.grid {
+  --gap: 1em;
+  --columns: 4;
+  max-width: 60rem;
+  margin: 0 auto;
+  display: column;
+  columns: var(--columns);
+  gap: var(--gap);
+}
+
+.grid > * {
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+}
+
+@supports (grid-template-rows: masonry) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: masonry;
+    grid-auto-flow: dense;
+    /* align-tracks: stretch; */
+  }
+
+  .grid > * {
+    margin-bottom: 0em;
+  }
+}
+
+[role='gridcell'] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
